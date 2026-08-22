@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { SectionShell, SectionHeading, Card, Callout, Pill } from "../ui/Primitives";
+import { SectionShell, SectionHeading, Card, Callout } from "../ui/Primitives";
 import { Slider } from "../ui/Slider";
 import { Button } from "../ui/Button";
-import { Eq, Math } from "../ui/Math";
+import { Eq } from "../ui/Math";
 import { LineGraph } from "../graphs/LineGraph";
 import { Prediction } from "../learning/Prediction";
 import {

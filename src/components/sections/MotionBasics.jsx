@@ -4,7 +4,6 @@ import { Slider } from "../ui/Slider";
 import { Button } from "../ui/Button";
 import { Math, Eq } from "../ui/Math";
 import { Prediction } from "../learning/Prediction";
-import { calculateDisplacement } from "../../physics/kinematics";
 
 // Section 1 — Motion Basics: distance, displacement, speed, velocity.
 // Interactive 1D track the student drags an object along.
@@ -143,8 +142,7 @@ const Readout = ({ label, value, unit, color }) => (
 // Canvas track rendering
 const TrackCanvas = ({ position, onMove, path }) => {
   const handleCanvas = (e) => {
-    const canvas = e.currentTarget;
-    const rect = canvas.getBoundingClientRect();
+    const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const frac = (x - 20) / (rect.width - 40);
     const pos = Math.max(-10, Math.min(10, frac * 20 - 10));
@@ -152,10 +150,21 @@ const TrackCanvas = ({ position, onMove, path }) => {
   };
   return (
     <div
-      className="relative w-full cursor-pointer rounded-xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white"
+      onClick={handleCanvas}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") onMove(Math.max(-10, position - 0.5));
+        if (e.key === "ArrowRight") onMove(Math.min(10, position + 0.5));
+      }}
+      tabIndex={0}
+      role="slider"
+      aria-label="Cart position slider"
+      aria-valuemin={-10}
+      aria-valuemax={10}
+      aria-valuenow={position}
+      className="relative w-full cursor-pointer rounded-xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white focus:outline-none focus:ring-2 focus:ring-blue-500"
       style={{ height: 120 }}
     >
-      <svg width="100%" height="100%" viewBox="0 0 600 120" preserveAspectRatio="none" className="absolute inset-0">
+      <svg width="100%" height="100%" viewBox="0 0 600 120" preserveAspectRatio="none" className="absolute inset-0 pointer-events-none">
         {/* track line */}
         <line x1="20" y1="70" x2="580" y2="70" stroke="#cbd5e1" strokeWidth="2" />
         {/* ticks */}

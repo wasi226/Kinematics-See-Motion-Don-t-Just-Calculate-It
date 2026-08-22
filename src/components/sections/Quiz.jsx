@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SectionShell, SectionHeading, Card, Callout, Pill } from "../ui/Primitives";
 import { Button } from "../ui/Button";
-import { Math } from "../ui/Math";
+import { Eq } from "../ui/Math";
 import { QUIZ_QUESTIONS } from "../../physics/quizData";
 
 // Section 9 — Quiz assessment.

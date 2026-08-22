@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { SectionShell, SectionHeading, Card, Callout, Pill } from "../ui/Primitives";
+import { useState, useRef, useEffect } from "react";
+import { SectionShell, SectionHeading, Card, Callout } from "../ui/Primitives";
 import { Slider } from "../ui/Slider";
 import { Button } from "../ui/Button";
-import { Math } from "../ui/Math";
+import { Math as MathComponent } from "../ui/Math";
 import {
   calculateRange,
-  timeOfFlight,
-  maximumHeight,
   sampleTrajectory,
   safeNumber,
 } from "../../physics/projectile";
@@ -88,7 +86,7 @@ export const MasteryChallenge = ({ onProgress }) => {
                  "Off target. Remember: at 45° you maximise range — adjust u to reach the target distance."}
               </p>
               <div className="mt-3">
-                <Math>{String.raw`R = \frac{u^2\sin(2\theta)}{g} = \frac{${u}^2\sin(${2 * theta}^\circ)}{${g}} \approx ${safeNumber(range)}\,\text{m}`}</Math>
+                <MathComponent>{String.raw`R = \frac{u^2\sin(2\theta)}{g} = \frac{${u}^2\sin(${2 * theta}^\circ)}{${g}} \approx ${safeNumber(range)}\,\text{m}`}</MathComponent>
               </div>
             </Card>
           )}
@@ -198,5 +196,3 @@ const TargetCanvas = ({ traj, target, launched, u, theta, g }) => {
   }, [traj, target, launched, u, theta, g]);
   return <canvas ref={ref} className="w-full rounded-xl border border-slate-200 bg-gradient-to-b from-sky-50/40 to-white" />;
 };
-
-import { useRef, useEffect } from "react";
