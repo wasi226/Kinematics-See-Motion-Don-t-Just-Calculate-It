@@ -52,7 +52,7 @@ npm install
 npm run dev
 ```
 
-✅ App opens automatically at `http://localhost:5173`
+✅ App opens automatically at `https://kinematics-see-motion-don-t-just-ca.vercel.app/`
 
 ### Production Build
 
